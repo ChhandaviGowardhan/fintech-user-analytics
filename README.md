@@ -157,13 +157,13 @@ This page focuses on understanding user quality and channel effectiveness.
 
 ### 🔹 Page 1 — Business Performance Overview
 
-![Page 1](images/Business Performance Overview.png)
+[![Page 1](images/Business Performace Overview.png)](images/Business Performace Overview.png)
 
 ---
 
 ### 🔹 Page 2 — User Behavior & Acquisition Insights
 
-![Page 2](images/User Behavior & Acquisition Insights.png)
+[![Page 2](images/User Behavior & Acquisition Insights.png)](images/User Behavior & Acquisition Insights.png)
 
 ---
 
