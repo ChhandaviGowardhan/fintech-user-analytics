@@ -36,16 +36,13 @@ This project addresses these questions through structured data analysis and visu
 
 ## 🛠️ Tech Stack
 
-| Category        | Tools                     |
-| --------------- | ------------------------- |
-| Programming     | Python                    |
-| Data Processing | Pandas, NumPy             |
-| Database        | MySQL                     |
-| Querying        | SQL                       |
-| Visualization   | Power BI                  |
-| Development     | VS Code, Jupyter Notebook |
-
----
+| Category | Tools |
+|--------|--------|
+| Programming | Python |
+| Data Processing | Pandas, NumPy |
+| Querying | SQL |
+| Visualization | Power BI |
+| Development | VS Code, Jupyter Notebook |
 
 ## 🗂️ Dataset
 
