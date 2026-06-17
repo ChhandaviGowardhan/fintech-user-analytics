@@ -167,6 +167,12 @@ This page focuses on understanding user quality and channel effectiveness.
 
 ---
 
+### 🔹 Page 3 — Customer Segmentation & Campaign Insights
+
+![Page 2](images/customer_segmentation.png)
+
+---
+
 ## 📈 Key Insights
 
 * 📉 A noticeable drop-off occurs between user signup and conversion stage
