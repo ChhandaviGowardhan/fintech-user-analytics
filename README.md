@@ -282,7 +282,7 @@ It highlights how data can be leveraged to evaluate product performance and driv
 
 ## 👩‍💻 Author
 
-**Chhandavi Gowardhan**
+**Chhandavi Gowardhan**                                                                                                     
 Aspiring Data Analyst
 
 Skills: Python • SQL • Power BI • Data Analytics • Product Analytics
