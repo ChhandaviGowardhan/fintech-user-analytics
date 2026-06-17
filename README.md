@@ -4,7 +4,7 @@
 
 ## 🚀 Overview
 
-This project simulates a real-world fintech product analytics workflow by analyzing user onboarding behavior, transaction activity, acquisition performance, and retention patterns.
+This project simulates a real-world fintech product analytics workflow by analyzing user onboarding behavior, transaction activity, acquisition performance, retention patterns, **customer segmentation, and campaign effectiveness**.
 
 The objective is to derive meaningful business insights that help improve user conversion, engagement, and long-term retention using Python, SQL, and Power BI.
 
@@ -18,7 +18,8 @@ Fintech platforms need to answer critical questions such as:
 * Where do users drop off during onboarding?
 * How do users behave after their first transaction?
 * Are users retained over time?
-* Which segments contribute most to revenue?
+* Which customer segments contribute most to revenue?
+* How effective are marketing campaigns?
 
 This project addresses these questions through structured data analysis and visualization.
 
@@ -30,19 +31,23 @@ This project addresses these questions through structured data analysis and visu
 * Evaluate acquisition channel effectiveness
 * Study transaction and revenue trends
 * Perform cohort-based retention analysis
+* Analyze campaign performance
+* Perform customer segmentation (RFM-based)
 * Build an interactive Power BI dashboard for decision-making
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Category | Tools |
-|--------|--------|
-| Programming | Python |
-| Data Processing | Pandas, NumPy |
-| Querying | SQL |
-| Visualization | Power BI |
-| Development | VS Code, Jupyter Notebook |
+| Category        | Tools                     |
+| --------------- | ------------------------- |
+| Programming     | Python                    |
+| Data Processing | Pandas, NumPy             |
+| Querying        | SQL (SQLite)              |
+| Visualization   | Power BI                  |
+| Development     | VS Code, Jupyter Notebook |
+
+---
 
 ## 🗂️ Dataset
 
@@ -53,17 +58,31 @@ The dataset was synthetically generated to mimic realistic fintech user behavior
 * user_id
 * signup_date
 * acquisition_channel
+* campaign_id
 * kyc_completed
 * is_converted
 
 ---
 
-### 💳 Transactions Dataset (~50,000 records)
+### 💳 Transactions Dataset (~54,000 records)
 
 * transaction_id
 * user_id
 * transaction_date
-* transaction_amount
+* amount
+* transaction_type
+* status
+
+---
+
+### 📢 Campaign Dataset (10 campaigns)
+
+* campaign_id
+* campaign_name
+* channel
+* start_date
+* end_date
+* cost
 
 ---
 
@@ -93,6 +112,18 @@ The dataset was synthetically generated to mimic realistic fintech user behavior
 * Revenue Contribution by Channel
 * Average Revenue per User (ARPU)
 
+### Segmentation Metrics
+
+* RFM Segments (High Value, Loyal, At Risk, Low Value, No Activity)
+* Revenue by Segment
+* Average Spend by Segment
+
+### Campaign Metrics
+
+* Users per Campaign
+* Revenue per Campaign
+* Campaign Conversion Trends
+
 ---
 
 ## 🧠 SQL Analysis
@@ -102,8 +133,9 @@ SQL was used to extract key business insights such as:
 * Funnel conversion rates
 * Transaction summaries
 * Acquisition channel performance
-* Revenue aggregation
-* User-level behavioral metrics
+* Campaign performance analysis
+* Customer segmentation logic
+* Retention cohort analysis
 
 Example:
 
@@ -111,10 +143,8 @@ Example:
 SELECT 
     acquisition_channel,
     COUNT(DISTINCT user_id) AS users,
-    SUM(transaction_amount) AS revenue
-FROM transactions t
-JOIN users u
-ON t.user_id = u.user_id
+    SUM(total_amount) AS revenue
+FROM users
 GROUP BY acquisition_channel;
 ```
 
@@ -122,7 +152,7 @@ GROUP BY acquisition_channel;
 
 ## 📊 Dashboard Overview
 
-The Power BI dashboard is divided into two focused analytical pages.
+The Power BI dashboard is divided into **three analytical pages**.
 
 ---
 
@@ -132,10 +162,10 @@ This page provides a high-level view of overall product performance.
 
 **Includes:**
 
-* Transaction trends over time (monthly & cumulative)
+* KPI Cards (Users, KYC, Conversion, Revenue)
+* Transaction trends over time
 * Revenue growth analysis
 * Conversion performance
-* Key business KPIs
 
 ---
 
@@ -153,6 +183,19 @@ This page focuses on understanding user quality and channel effectiveness.
 
 ---
 
+### 🟨 Page 3 — Customer Segmentation & Campaign Analysis
+
+This page focuses on deeper behavioral and marketing insights.
+
+**Includes:**
+
+* User distribution by segment
+* Average spend per segment
+* Revenue contribution by segment
+* Revenue by campaign
+
+---
+
 ## 📷 Dashboard Screenshots
 
 ### 🔹 Page 1 — Business Performance Overview
@@ -167,19 +210,20 @@ This page focuses on understanding user quality and channel effectiveness.
 
 ---
 
-### 🔹 Page 3 — Customer Segmentation & Campaign Insights
+### 🔹 Page 3 — Customer Segmentation & Campaign Analysis
 
-![Page 2](images/customer_segmentation.png)
+![Page 3](images/customer_segmentation.png)
 
 ---
 
 ## 📈 Key Insights
 
-* 📉 A noticeable drop-off occurs between user signup and conversion stage
-* 📣 Referral channels demonstrate higher conversion efficiency compared to paid channels
-* 💰 Revenue is concentrated among a subset of high-value users
-* 📊 Some channels generate high user volume but lower revenue contribution
-* 🔁 Retention decreases gradually over time, indicating opportunity for engagement strategies
+* 📉 Significant drop-off observed between signup and conversion
+* 📣 Referral channels show higher conversion efficiency
+* 💰 High-value users contribute disproportionately to total revenue
+* ⚠️ Large portion of users fall into "At Risk" category
+* 📊 Some campaigns drive high revenue but vary in user acquisition quality
+* 🔁 Retention declines over time but stabilizes after initial drop
 
 ---
 
@@ -191,19 +235,22 @@ fintech-user-analytics/
 ├── data/
 │   ├── raw/
 │   └── processed/
+|   └── fintech.db
 │
 ├── notebooks/
-│   └── fintech_analysis.ipynb
-│
-├── sql/
-│   └── analysis_queries.sql
+│   ├── data_generation.ipynb
+│   └── sql_analysis.ipynb
 │
 ├── powerbi/
-│   └── dashboard.pbix
+│   └── Dashboard.pbix
+|   └── Dashboard.pdf
 │
 ├── images/
-│   ├── page1.png
-│   └── page2.png
+│   ├── business_overview.png
+│   ├── user_insights.png
+│   └── customer_segmentation.png
+|
+├── requirements.txt
 │
 └── README.md
 ```
@@ -216,7 +263,8 @@ This project demonstrates an end-to-end product analytics workflow, covering:
 
 * Data generation and preprocessing
 * SQL-based business analysis
-* KPI development and interpretation
+* Customer segmentation (RFM)
+* Campaign performance evaluation
 * Dashboard creation for stakeholder insights
 
 It highlights how data can be leveraged to evaluate product performance and drive strategic decisions.
@@ -225,10 +273,10 @@ It highlights how data can be leveraged to evaluate product performance and driv
 
 ## 🔗 Future Improvements
 
-* Advanced user segmentation (RFM analysis)
+* Advanced segmentation (K-Means clustering)
 * Predictive modeling (churn prediction)
-* Integration with real-world datasets
-* Enhanced dashboard interactivity
+* Real-time data pipeline integration
+* More accurate campaign ROI modeling
 
 ---
 
